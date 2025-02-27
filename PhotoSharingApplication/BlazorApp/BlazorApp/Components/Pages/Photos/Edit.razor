@@ -1,0 +1,31 @@
+﻿@* @rendermode InteractiveServer *@
+
+@page "/photos/create"
+@page "/photos/edit/{id:int}"
+
+<h3>Editor</h3>
+
+<EditForm Model="@photo" OnSubmit="Save" FormName="PhotoForm" enctype="multipart/form-data">
+	<InputNumber @bind-Value="photo.Id" hidden />
+	
+	<ol>
+		<li>
+			<label for="form-title">Title: </label><br />
+			<InputText @bind-value="photo.Title" id="form-title" />
+		</li>
+		<li>
+			<label for="form-description">Description: </label><br />
+			<InputTextArea @bind-value="photo.Description" id="form-description" />
+		</li>
+		<li>
+			<label for="form-file">File: </label><br />
+			<InputFile name="fileModel.File" />
+		</li>
+		<li>
+			<img src="@photo.DataUrl" alt="@photo.Title" style="max-width: 100px"/>
+		</li>
+		<li>
+			<button type="submit">Save</button>
+		</li>
+	</ol>
+</EditForm>

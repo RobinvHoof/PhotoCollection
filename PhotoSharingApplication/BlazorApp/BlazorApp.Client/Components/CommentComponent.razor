@@ -1,0 +1,48 @@
+﻿<div class="@(commentState == CommentStates.Insert ? "new-comment" : "comment")">
+	<MudCard Style="width: 95%">
+		<MudCardHeader>
+			@switch(commentState)
+			{
+				case (CommentStates.Edit or CommentStates.Insert):
+					<MudTextField @bind-Value="comment.Subject" Label="Subject" FullWidth />
+					break;
+
+				default:
+					@comment.Subject
+					break;
+			}
+		</MudCardHeader>
+		<MudCardContent>
+			@switch (commentState)
+			{
+				case (CommentStates.Edit or CommentStates.Insert):
+					<MudTextField Lines="5" @bind-Value="comment.Body" Label="Message" FullWidth />
+					break;
+
+				default:
+					@comment.Body
+					break;
+			}
+		</MudCardContent>
+		<MudCardActions>
+			@switch (commentState)
+			{
+				case CommentStates.View:
+					<MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Default" @onclick="() => { commentState = CommentStates.Edit; }" />
+					<MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" @onclick="OnDeleteClicked" />
+					break;
+				case CommentStates.Insert:
+					<MudIconButton Icon="@Icons.Material.Filled.Add" Color="Color.Success" @onclick="OnAddClicked" />
+					break;
+				case CommentStates.Edit:
+					<MudIconButton Icon="@Icons.Material.Filled.Save" Color="Color.Success" @onclick="OnSaveClicked" />
+					<MudIconButton Icon="@Icons.Material.Filled.Cancel" Color="Color.Error" @onclick="OnCancelClicked" />
+					break;
+				case CommentStates.Delete:
+					<MudIconButton Icon="@Icons.Material.Filled.Check" Color="Color.Error" @onclick="OnDeleteConfirmedClicked" />
+					<MudIconButton Icon="@Icons.Material.Filled.Cancel" Color="Color.Error" @onclick="OnCancelClicked" />
+					break;
+			}
+		</MudCardActions>
+	</MudCard>
+</div>

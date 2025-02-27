@@ -1,0 +1,21 @@
+﻿@page "/photos/details/{id:int}"
+
+@if (photo is null)
+{
+	<p>Photo not found</p>
+}
+else
+{
+	<div class="flex-container">
+		<article class="flex-item">
+			<h2>@photo.Title</h2>
+			<p>@photo.Description</p><br />
+			<center><img src="@photo.DataUrl" alt="@photo.Title" /></center>
+		</article>
+		<div class="flex-item">
+			<BlazorApp.Client.Components.CommentsComponent PhotoId="@photo.Id" @rendermode="InteractiveWebAssembly" />
+		</div>
+	</div>
+	
+	
+}

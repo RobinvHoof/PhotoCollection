@@ -1,0 +1,18 @@
+﻿<CommentComponent 
+	Comment="newComment"
+	CommentState="CommentComponent.CommentStates.Insert" 
+	OnAddComment="AddComment"
+	
+/>
+
+@if (comments is not null)
+{
+	@foreach (var comment in comments)
+	{
+		<CommentComponent 
+			Comment="comment"	  
+			CommentState="CommentComponent.CommentStates.View" 
+			OnUpdateComment="UpdateComment"			  
+			OnDeleteComment="DeleteComment" />
+	}
+}

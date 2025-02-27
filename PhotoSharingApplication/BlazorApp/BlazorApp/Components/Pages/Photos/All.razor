@@ -1,0 +1,34 @@
+﻿@page "/"
+
+@using System.Runtime.CompilerServices
+@using BlazorApp.Core.Models
+
+@if (photos == null)
+{
+	<div>
+		... Loading ...
+	</div>
+}
+else
+{
+	<div class="flex-container">
+		@foreach (Photo photo in photos)
+		{
+			
+				<div class="card">
+					<MudCard>
+						<MudCardMedia Image="@photo.DataUrl" Height="200" />
+						<MudCardContent>
+							<MudText Typo="Typo.h4">@photo.Title</MudText>
+							<MudText Typo="Typo.body1">@photo.Description</MudText>
+						</MudCardContent>
+						<MudCardActions>
+							<MudIconButton Icon="@Icons.Material.Filled.TableView" Color="Color.Default" Href="@($"/photos/details/{photo.Id}")"/>
+							<MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Default" Href="@($"/photos/edit/{photo.Id}")" />
+							<MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Default" Href="@($"/photos/delete/{photo.Id}")" />
+						</MudCardActions>
+					</MudCard>
+				</div>
+		}
+	</div>
+}
